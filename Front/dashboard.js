@@ -16,7 +16,7 @@ async function ensureAuth() {
   const response = await authFetch("/api/me");
   if (!response.ok) {
     clearToken();
-    window.location.href = "login.html";
+    window.location.href = "/login";
     return null;
   }
   const user = await response.json();
@@ -259,7 +259,7 @@ if (logoutBtn) {
   logoutBtn.addEventListener("click", async () => {
     await authFetch("/api/auth/logout", { method: "POST" });
     clearToken();
-    window.location.href = "login.html";
+    window.location.href = "/login";
   });
 }
 

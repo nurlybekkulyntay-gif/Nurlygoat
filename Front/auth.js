@@ -30,7 +30,7 @@ if (loginForm) {
 
     const data = await response.json();
     setToken(data.token);
-    window.location.href = "dashboard.html";
+    window.location.href = "/dashboard";
   });
 }
 
@@ -65,7 +65,7 @@ if (registerForm) {
 
     showToast("Account created! Please login.");
     setTimeout(() => {
-      window.location.href = "login.html";
+      window.location.href = "/login";
     }, 800);
   });
 }
