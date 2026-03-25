@@ -10,6 +10,7 @@ import secrets
 from typing import List, Optional
 
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, UploadFile
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -23,6 +24,7 @@ if str(BASE_DIR) not in sys.path:
 from database.db import Base, SessionLocal, engine
 UPLOAD_DIR = BASE_DIR / "Back" / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+FRONT_DIR = BASE_DIR / "Front"
 
 
 class User(Base):
@@ -151,6 +153,7 @@ def on_startup() -> None:
 
 
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+app.mount("/static", StaticFiles(directory=FRONT_DIR), name="static")
 
 
 def get_db():
@@ -250,6 +253,26 @@ def save_upload(file: UploadFile) -> str:
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/")
+def root() -> FileResponse:
+    return FileResponse(FRONT_DIR / "login.html")
+
+
+@app.get("/login")
+def login_page() -> FileResponse:
+    return FileResponse(FRONT_DIR / "login.html")
+
+
+@app.get("/register")
+def register_page() -> FileResponse:
+    return FileResponse(FRONT_DIR / "register.html")
+
+
+@app.get("/dashboard")
+def dashboard_page() -> FileResponse:
+    return FileResponse(FRONT_DIR / "dashboard.html")
 
 
 @app.post("/api/auth/register", response_model=UserOut)
