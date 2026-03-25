@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Task Manager - Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="m.css" />
+</head>
+<body class="page">
+  <nav class="navbar">
+    <div class="brand">
+      <span>STM</span>
+      Student Task Manager
+    </div>
+    <div class="user-actions">
+      <div id="userAvatar" class="avatar">U</div>
+      <button id="logoutBtn" class="btn btn-secondary" type="button">Logout</button>
+    </div>
+  </nav>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="#">Tasks</a>
+      <a href="#">Completed</a>
+      <a href="#">Settings</a>
+    </aside>
+
+    <section class="content">
+      <div class="section-header">
+        <h1>My Tasks</h1>
+        <p>Manage your daily tasks</p>
+      </div>
+
+      <div class="card">
+        <form id="taskForm" class="task-form">
+          <div class="form-group">
+            <label for="taskTitle">Task Title</label>
+            <input id="taskTitle" name="taskTitle" type="text" placeholder="Add new task..." required />
+          </div>
+          <div class="form-group">
+            <label for="taskDescription">Description (optional)</label>
+            <textarea id="taskDescription" name="taskDescription" placeholder="Add details"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="taskImage">Upload Image (optional)</label>
+            <input id="taskImage" name="taskImage" type="file" accept="image/*" />
+          </div>
+          <button class="btn" type="submit">+ Add Task</button>
+        </form>
+      </div>
+
+      <div id="taskList" class="task-grid"></div>
+
+      <div id="emptyState" class="empty-state" style="display: none;">
+        <div style="font-size: 32px;">???</div>
+        <h3>No tasks yet</h3>
+        <p>Create your first task to get started</p>
+        <button class="btn" id="emptyCreate">Create Task</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Task</h2>
+      <form id="editForm" class="task-form">
+        <div class="form-group">
+          <label for="editTitle">Title</label>
+          <input id="editTitle" name="editTitle" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="editDescription">Description</label>
+          <textarea id="editDescription" name="editDescription"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="editImage">Replace Image</label>
+          <input id="editImage" name="editImage" type="file" accept="image/*" />
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn" type="submit">Save Changes</button>
+          <button class="btn btn-secondary" id="closeModal" type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="shared.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
